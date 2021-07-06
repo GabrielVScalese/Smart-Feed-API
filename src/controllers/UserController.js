@@ -23,7 +23,7 @@ module.exports = {
 
       return res.status(200).send(user);
     } catch (err) {
-      return res.status(500).send({ message: "Error for insert user" });
+      return res.status(401).send({ message: "Error for insert user" });
     }
   },
 
@@ -55,7 +55,7 @@ module.exports = {
 
       return res.status(200).send({ message: "Updated user" });
     } catch (err) {
-      return res.status(500).send({ message: "Error for update user" });
+      return res.status(401).send({ message: "Error for update user" });
     }
   },
 

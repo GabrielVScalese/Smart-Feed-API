@@ -17,5 +17,6 @@ routes.post("/api/users/authenticate", UserController.authenticate);
 // Pets
 routes.get("/api/pets", PetController.findAll);
 routes.post("/api/pets/insertPet", PetController.store);
+routes.put("/api/pets/update/:id", PetController.update);
 
 module.exports = routes;

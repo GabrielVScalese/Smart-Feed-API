@@ -39,7 +39,7 @@ module.exports = {
       }
     );
 
-    return res.status(200).send(user);
+    return res.status(200).send({ message: "Updated user" });
   },
 
   async authenticate(req, res) {

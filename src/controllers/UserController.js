@@ -9,37 +9,54 @@ module.exports = {
   },
 
   async store(req, res) {
-    const { name, email, password } = req.body;
+    try {
+      const { name, email, password } = req.body;
 
-    const passwordHash = await hash(password, 8);
+      const passwordHash = await hash(password, 8);
 
-    const user = await User.create({
-      name: name,
-      email: email,
-      password: passwordHash,
-      verified: false,
-    });
+      const user = await User.create({
+        name: name,
+        email: email,
+        password: passwordHash,
+        verified: false,
+      });
 
-    return res.status(200).send(user);
+      return res.status(200).send(user);
+    } catch (err) {
+      return res.status(500).send({ message: "Error for insert user" });
+    }
   },
 
   async update(req, res) {
-    const _email = req.params.email;
+    try {
+      const _email = req.params.email;
 
-    const { name, email, password } = req.body;
+      const { name, email, password } = req.body;
 
-    const passwordHash = await hash(password, 8);
-
-    await User.update(
-      { name, email, passwordHash },
-      {
+      const user = await User.findOne({
         where: {
           email: _email,
         },
-      }
-    );
+      });
 
-    return res.status(200).send({ message: "Updated user" });
+      if (user == null)
+        return res.status(401).send({ message: "Invalid user" });
+
+      const passwordHash = await hash(password, 8);
+
+      await User.update(
+        { name, email, passwordHash },
+        {
+          where: {
+            email: _email,
+          },
+        }
+      );
+
+      return res.status(200).send({ message: "Updated user" });
+    } catch (err) {
+      return res.status(500).send({ message: "Error for update user" });
+    }
   },
 
   async authenticate(req, res) {
@@ -51,6 +68,9 @@ module.exports = {
       },
     });
 
+    if (user == null)
+      return res.status(401).send({ message: "Unauthorized user" });
+
     const passwordMatch = await compare(password, user["password"]);
 
     if (!passwordMatch)
@@ -61,6 +81,15 @@ module.exports = {
 
   async delete(req, res) {
     const email = req.params.email;
+
+    const user = await User.findOne({
+      where: {
+        email: email,
+      },
+    });
+
+    if (user == null)
+      return res.status(401).send({ messsage: "Invalid credential" });
 
     await User.destroy({ where: { email: email } });
 

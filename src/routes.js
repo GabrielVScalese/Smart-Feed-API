@@ -10,16 +10,16 @@ routes.get("", (req, res) => {
 
 // Users
 routes.get("/api/users", UserController.findAll);
-routes.post("/api/users/insert", UserController.store);
-routes.put("/api/users/update/:email", UserController.update);
-routes.post("/api/users/authenticate", UserController.authenticate);
-routes.delete("/api/users/delete/:email", UserController.delete);
+routes.post("/api/users", UserController.store);
+routes.put("/api/users/:email", UserController.update);
+routes.post("/api/auth", UserController.authenticate);
+routes.delete("/api/users/:email", UserController.delete);
 
 // Pets
 routes.get("/api/pets", PetController.findAll);
 routes.get("/api/pets/:email", PetController.findByEmail);
-routes.post("/api/pets/insertPet", PetController.store);
-routes.put("/api/pets/update/:id", PetController.update);
-routes.delete("/api/pets/delete/:id", PetController.delete);
+routes.post("/api/pets", PetController.store);
+routes.put("/api/pets/:id", PetController.update);
+routes.delete("/api/pets/:id", PetController.delete);
 
 module.exports = routes;

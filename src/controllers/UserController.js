@@ -79,7 +79,7 @@ module.exports = {
     return res.status(200).send({ message: "Authorized user" });
   },
 
-  async delete(req, res) {
+  async destroy(req, res) {
     const email = req.params.email;
 
     const user = await User.findOne({

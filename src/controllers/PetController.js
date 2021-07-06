@@ -57,7 +57,7 @@ module.exports = {
     }
   },
 
-  async delete(req, res) {
+  async destroy(req, res) {
     const id = req.params.id;
 
     const pet = await Pet.findOne({

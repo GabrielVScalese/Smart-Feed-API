@@ -30,7 +30,7 @@ module.exports = {
 
     const passwordHash = await hash(password, 8);
 
-    const user = await User.update(
+    await User.update(
       { name, email, passwordHash },
       {
         where: {
@@ -57,5 +57,13 @@ module.exports = {
       return res.status(401).send({ message: "Unauthorized user" });
 
     return res.status(200).send({ message: "Authorized user" });
+  },
+
+  async delete(req, res) {
+    const email = req.params.email;
+
+    await User.destroy({ where: { email: email } });
+
+    return res.status(200).send({ message: "Deleted user" });
   },
 };

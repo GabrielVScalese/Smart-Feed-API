@@ -12,7 +12,7 @@
   "paths": {
     "/api/users": {
       "post": {
-        "summary": "Add new user",
+        "summary": "Add a new user",
         "description": "This route add a new user.",
         "tags": ["Users"],
         "requestBody": {

@@ -129,6 +129,14 @@
         "summary": "Delete user",
         "description": "Only existing user.",
         "tags": ["Users"],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "description": "User email",
+            "required": true
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -229,7 +237,7 @@
           {
             "name": "email",
             "in": "path",
-            "description": "Email do dono",
+            "description": "Owner email",
             "required": true
           }
         ],

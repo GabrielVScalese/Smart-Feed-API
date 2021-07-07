@@ -222,7 +222,7 @@
     },
     "/api/pets/findByEmail/{email}": {
       "get": {
-        "summary": "Find pets by email",
+        "summary": "Find pets by owner email",
         "description": "Get all pets using a owner email.",
         "tags": ["Pets"],
         "parameters": [

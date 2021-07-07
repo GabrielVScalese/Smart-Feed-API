@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "Smart Feed API",
-    "description": "This API control users and their pets",
+    "description": "This API controls users and their pets",
     "contact": {
       "email": "cc19171@g.unicamp.br"
     },
@@ -13,7 +13,7 @@
     "/api/users": {
       "post": {
         "summary": "Add a new user",
-        "description": "This route add a new user.",
+        "description": "This route adds a new user.",
         "tags": ["Users"],
         "requestBody": {
           "content": {
@@ -139,7 +139,7 @@
     "/api/pets": {
       "post": {
         "summary": "Add a new pet",
-        "description": "This route add a new pet.",
+        "description": "This route adds a new pet.",
         "tags": ["Pets"],
         "requestBody": {
           "content": {

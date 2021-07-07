@@ -1,0 +1,402 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Smart Feed API",
+    "description": "This API control users and their pets",
+    "contact": {
+      "email": "cc19171@g.unicamp.br"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [],
+  "paths": {
+    "/api/users": {
+      "post": {
+        "summary": "Add new user",
+        "description": "This route add a new user.",
+        "tags": ["Users"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              },
+              "examples": {
+                "user": {
+                  "value": {
+                    "name": "Gabriel Scalese",
+                    "email": "gabriel.scalese@hotmail.com",
+                    "password": "1234"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Find users",
+        "description": "Get all registered users.",
+        "tags": ["Users"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/{email}": {
+      "put": {
+        "summary": "Update user",
+        "description": "Only existing user.",
+        "tags": ["Users"],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "description": "User email",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              },
+              "examples": {
+                "user": {
+                  "value": {
+                    "name": "Gabriel Scalese",
+                    "email": "gabriel.cotuca@hotmail.com",
+                    "password": "12345"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete user",
+        "description": "Only existing user.",
+        "tags": ["Users"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/pets": {
+      "post": {
+        "summary": "Add a new pet",
+        "description": "This route add a new pet.",
+        "tags": ["Pets"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "user_id": {
+                    "type": "number"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "animal": {
+                    "type": "string"
+                  },
+                  "ration": {
+                    "type": "string"
+                  },
+                  "size": {
+                    "type": "string"
+                  },
+                  "device": {
+                    "type": "string"
+                  },
+                  "image": {
+                    "type": "string"
+                  }
+                }
+              },
+              "examples": {
+                "pet": {
+                  "value": {
+                    "user_id": 39,
+                    "name": "Bella",
+                    "animal": "Cão",
+                    "ration": "Premium",
+                    "size": "Grande",
+                    "device": "Smart Feed UHG78F",
+                    "image": "https://th.bing.com/th/id/OIP.ZIF41Upi75jdmWdg2lURQgHaHa?pid=ImgDet&rs=1"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Pet"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Find pets",
+        "description": "Get all registered pets.",
+        "tags": ["Pets"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Pet"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/pets/findByEmail/{email}": {
+      "get": {
+        "summary": "Find pets by email",
+        "description": "Get all pets using a owner email.",
+        "tags": ["Pets"],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "description": "Email do dono",
+            "required": true
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Invalid credential"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Pet"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/pets/{id}": {
+      "put": {
+        "summary": "Update pet",
+        "description": "Only existing pet.",
+        "tags": ["Pets"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Pet id",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "user_id": { "type": "number" },
+                  "name": {
+                    "type": "string"
+                  },
+                  "animal": {
+                    "type": "string"
+                  },
+                  "ration": {
+                    "type": "string"
+                  },
+                  "size": {
+                    "type": "string"
+                  },
+                  "device": {
+                    "type": "string"
+                  },
+                  "image": {
+                    "type": "string"
+                  }
+                }
+              },
+              "examples": {
+                "pet": {
+                  "value": {
+                    "user_id": 40,
+                    "name": "Bella",
+                    "animal": "Cão",
+                    "ration": "Super Premium",
+                    "size": "Grande",
+                    "device": "Smart Feed UJK4EG",
+                    "image": "https://th.bing.com/th/id/OIP.ZIF41Upi75jdmWdg2lURQgHaHa?pid=ImgDet&rs=1"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete pet",
+        "description": "Only existing pet.",
+        "tags": ["Pets"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Pet id",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "verified": {
+            "type": "boolean"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          }
+        }
+      },
+      "Pet": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "user_id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "animal": {
+            "type": "string"
+          },
+          "ration": {
+            "type": "string"
+          },
+          "size": {
+            "type": "string"
+          },
+          "device": {
+            "type": "string"
+          },
+          "image": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

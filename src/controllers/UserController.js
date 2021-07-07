@@ -1,5 +1,7 @@
 const User = require("../models/User");
+const VerificationToken = require("../models/VerificationToken");
 const { hash, compare } = require("bcryptjs");
+const { sign } = require("jsonwebtoken");
 
 module.exports = {
   async findAll(req, res) {
@@ -21,9 +23,19 @@ module.exports = {
         verified: false,
       });
 
-      return res.status(200).send(user);
+      const token = sign({}, process.env.SECRET_KEY, {
+        subject: user["id"].toString(),
+        expiresIn: "5m",
+      });
+
+      const verificationToken = await VerificationToken.create({
+        user_id: user["id"],
+        token: token,
+      });
+
+      return res.status(200).send({ user, verificationToken });
     } catch (err) {
-      return res.status(401).send({ message: "Error for insert user" });
+      return res.status(401).send({ message: "Invalid body" });
     }
   },
 

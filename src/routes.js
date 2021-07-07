@@ -4,9 +4,9 @@ const routes = express.Router();
 const UserController = require("./controllers/UserController");
 const PetController = require("./controllers/PetController");
 
-// routes.get("", (req, res) => {
-//   return res.json({ message: "Smart Feed API" });
-// });
+routes.get("", (req, res) => {
+  return res.json({ message: "Smart Feed API" });
+});
 
 // Users
 routes.get("/users", UserController.findAll);

@@ -1,5 +1,5 @@
-const UsersRepository = require("../../repositories/UsersRepository");
-const TokenProvider = require("../../providers/TokenProvider");
+const UsersRepository = require("../../../repositories/UsersRepository");
+const TokenProvider = require("../../../providers/TokenProvider");
 const { compare } = require("bcryptjs");
 
 class AuthenticateUserCase {

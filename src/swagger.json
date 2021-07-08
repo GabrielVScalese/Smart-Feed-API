@@ -10,84 +10,16 @@
   },
   "servers": [],
   "paths": {
-    "/api/users": {
-      "post": {
-        "summary": "Add a new user",
-        "description": "This route adds a new user.",
-        "tags": ["Users"],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "properties": {
-                  "name": {
-                    "type": "string"
-                  },
-                  "email": {
-                    "type": "string"
-                  },
-                  "password": {
-                    "type": "string"
-                  }
-                }
-              },
-              "examples": {
-                "user": {
-                  "value": {
-                    "name": "Gabriel Scalese",
-                    "email": "gabriel.scalese@hotmail.com",
-                    "password": "1234"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "$ref": "#/components/schemas/User"
-                }
-              }
-            }
-          }
-        }
-      },
-      "get": {
-        "summary": "Find users",
-        "description": "Get all registered users.",
-        "tags": ["Users"],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/User"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/users/{email}": {
+    "/api/users/{id}": {
       "put": {
         "summary": "Update user",
         "description": "Only existing user.",
         "tags": ["Users"],
         "parameters": [
           {
-            "name": "email",
+            "name": "id",
             "in": "path",
-            "description": "User email",
+            "description": "User id",
             "required": true
           }
         ],
@@ -131,9 +63,9 @@
         "tags": ["Users"],
         "parameters": [
           {
-            "name": "email",
+            "name": "id",
             "in": "path",
-            "description": "User email",
+            "description": "User id",
             "required": true
           }
         ],

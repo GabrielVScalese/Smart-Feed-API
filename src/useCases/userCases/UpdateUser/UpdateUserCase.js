@@ -1,4 +1,4 @@
-const UsersRepository = require("../../repositories/UsersRepository");
+const UsersRepository = require("../../../repositories/UsersRepository");
 
 class UpdateUserCase {
   async execute(data) {

@@ -12,6 +12,16 @@ class UsersRepository {
     return user;
   }
 
+  async findById(id) {
+    const user = await User.findOne({
+      where: {
+        id: id,
+      },
+    });
+
+    return user;
+  }
+
   async save(user) {
     const passwordHash = await hash(user["password"], 8);
 
@@ -23,6 +33,27 @@ class UsersRepository {
     });
 
     return new_user;
+  }
+
+  async update(user) {
+    const passwordHash = await hash(user["password"], 8);
+
+    await User.update(
+      {
+        name: user["name"],
+        email: user["email"],
+        password: passwordHash,
+      },
+      { where: { id: user["id"] } }
+    );
+  }
+
+  async destroy(id) {
+    await User.destroy({
+      where: {
+        id: id,
+      },
+    });
   }
 }
 

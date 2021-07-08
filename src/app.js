@@ -10,6 +10,6 @@ const app = express();
 
 app.use(express.json());
 app.use(routes);
-app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggetDocs));
+// app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggetDocs));
 
 module.exports = app;

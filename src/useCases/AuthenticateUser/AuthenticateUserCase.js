@@ -20,6 +20,7 @@ class AuthenticateUserCase {
     const token = tokenProvider.execute(userAlreadyExists["id"]);
 
     userAlreadyExists["password"] = undefined;
+
     return { user: userAlreadyExists, token };
   }
 }

@@ -9,6 +9,8 @@ const DeleteUserController = require("./useCases/userCases/DeleteUser/DeleteUser
 const AuthenticateUserController = require("./useCases/userCases/AuthenticateUser/AuthenticateUserController");
 
 const CreatePetController = require("./useCases/petCases/CreatePet/CreatePetController");
+const UpdatePetController = require("./useCases/petCases/UpdatePet/UpdatePetController");
+const DeletePetController = require("./useCases/petCases/DeletePet/DeletePetController");
 
 routes.get("", (req, res) => {
   return res.json({ message: "Smart Feed API" });
@@ -19,6 +21,8 @@ routes.put("/users/:id", ensureAuthenticated, UpdateUserController.handle);
 routes.delete("/users/:id", ensureAuthenticated, DeleteUserController.handle);
 routes.post("/users/authenticate", AuthenticateUserController.handle);
 
-routes.post("/pets", CreatePetController.handle);
+routes.post("/pets", ensureAuthenticated, CreatePetController.handle);
+routes.put("/pets/:id", ensureAuthenticated, UpdatePetController.handle);
+routes.delete("/pets/:id", ensureAuthenticated, DeletePetController.handle);
 
 module.exports = routes;

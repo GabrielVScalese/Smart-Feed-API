@@ -8,9 +8,54 @@
     },
     "version": "1.0.0"
   },
+  "schemes": ["http", "https"],
+  "host": "smart-feed-app.herokuapp.com/",
   "servers": [],
   "paths": {
-    "/api/users/{id}": {
+    "/users": {
+      "post": {
+        "summary": "Add a new user",
+        "description": "This route adds a new user",
+        "tags": ["Users"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              },
+              "examples": {
+                "user": {
+                  "value": {
+                    "name": "Gabriel Scalese",
+                    "email": "cc19171@g.unicamp.br",
+                    "password": "1234"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "User already exists"
+          }
+        }
+      }
+    },
+    "/users/{id}": {
       "put": {
         "summary": "Update user",
         "description": "Only existing user.",
@@ -54,6 +99,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Nonexistent user"
           }
         }
       },
@@ -72,11 +120,53 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Nonexistent user"
           }
         }
       }
     },
-    "/api/pets": {
+    "/users/authenticate": {
+      "post": {
+        "summary": "Authenticate a user",
+        "description": "This route authenticates a user",
+        "tags": ["Users"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              },
+              "examples": {
+                "user": {
+                  "value": {
+                    "email": "cc19171@g.unicamp.br",
+                    "password": "1234"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Nonexistent user"
+          }
+        }
+      }
+    },
+    "/pets": {
       "post": {
         "summary": "Add a new pet",
         "description": "This route adds a new pet.",
@@ -138,62 +228,9 @@
             }
           }
         }
-      },
-      "get": {
-        "summary": "Find pets",
-        "description": "Get all registered pets.",
-        "tags": ["Pets"],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Pet"
-                  }
-                }
-              }
-            }
-          }
-        }
       }
     },
-    "/api/pets/findByEmail/{email}": {
-      "get": {
-        "summary": "Find pets by owner email",
-        "description": "Get all pets using a owner email.",
-        "tags": ["Pets"],
-        "parameters": [
-          {
-            "name": "email",
-            "in": "path",
-            "description": "Owner email",
-            "required": true
-          }
-        ],
-        "responses": {
-          "401": {
-            "description": "Invalid credential"
-          },
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Pet"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/pets/{id}": {
+    "/pets/{id}": {
       "put": {
         "summary": "Update pet",
         "description": "Only existing pet.",
@@ -251,6 +288,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Nonexistent pet"
           }
         }
       },
@@ -269,6 +309,42 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Nonexistent pet"
+          }
+        }
+      }
+    },
+    "/pets/findByOwner/{id}": {
+      "get": {
+        "summary": "Find pets by owner id",
+        "description": "Get all pets using a owner id.",
+        "tags": ["Pets"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Owner id",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Pet"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Nonexistent owner"
           }
         }
       }

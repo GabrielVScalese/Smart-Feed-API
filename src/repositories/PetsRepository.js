@@ -1,6 +1,16 @@
 const Pet = require("../models/Pet");
 
 class PetsRepository {
+  async findByUserId(userId) {
+    const pets = await Pet.findAll({
+      where: {
+        user_id: userId,
+      },
+    });
+
+    return pets;
+  }
+
   async findById(id) {
     const pet = await Pet.findOne({
       where: {

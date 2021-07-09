@@ -136,6 +136,9 @@
           },
           "400": {
             "description": "Nonexistent user"
+          },
+          "401": {
+            "description": "Unauthorized"
           }
         }
       }

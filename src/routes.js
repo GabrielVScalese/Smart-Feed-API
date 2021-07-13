@@ -13,6 +13,8 @@ const UpdatePetController = require("./useCases/petCases/UpdatePet/UpdatePetCont
 const DeletePetController = require("./useCases/petCases/DeletePet/DeletePetController");
 const GetPetsController = require("./useCases/petCases/GetPets/GetPetsController");
 
+const RefreshTokenController = require("./useCases/tokenCases/RefreshTokenController");
+
 routes.get("", (req, res) => {
   return res.json({ message: "Smart Feed API" });
 });
@@ -30,5 +32,7 @@ routes.get(
   ensureAuthenticated,
   GetPetsController.handle
 );
+
+routes.post("/refresh-token", RefreshTokenController.handle);
 
 module.exports = routes;

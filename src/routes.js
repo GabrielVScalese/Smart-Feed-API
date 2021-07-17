@@ -33,6 +33,6 @@ routes.get(
   GetPetsController.handle
 );
 
-routes.post("/refresh-token", RefreshTokenController.handle);
+routes.post("/refreshToken", RefreshTokenController.handle);
 
 module.exports = routes;

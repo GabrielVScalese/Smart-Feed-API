@@ -7,6 +7,8 @@ class RefreshTokenProvider {
     const refreshTokensRepository = new RefreshTokensRepository();
 
     const expiresIn = dayjs().add(15, "day").unix();
+
+    await refreshTokensRepository.destroyByUserId(userId);
     const newRefreshToken = await refreshTokensRepository.save({
       id: v4(),
       user_id: userId,

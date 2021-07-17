@@ -24,6 +24,14 @@ class RefreshTokensRepository {
       },
     });
   }
+
+  async destroyByUserId(userId) {
+    await RefreshToken.destroy({
+      where: {
+        user_id: userId,
+      },
+    });
+  }
 }
 
 module.exports = RefreshTokensRepository;

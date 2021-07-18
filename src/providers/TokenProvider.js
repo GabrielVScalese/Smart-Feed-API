@@ -3,7 +3,7 @@ const { sign } = require("jsonwebtoken");
 class TokenProvider {
   execute(userId) {
     const token = sign({ id: userId }, process.env.SECRET_KEY, {
-      expiresIn: 86400,
+      expiresIn: 20,
     });
 
     return token;

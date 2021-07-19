@@ -6,12 +6,12 @@ module.exports = {
 
     if (!authToken) return res.status(401).send({ message: "Unauthorized" });
 
-    const [, token] = authToken.split(" ");
+    // const [, token] = authToken.split(" ");
 
-    console.log(token);
+    // console.log(token);
 
     try {
-      const decoded = verify(token, process.env.SECRET_KEY);
+      const decoded = verify(authToken, process.env.SECRET_KEY);
 
       req.id = decoded["id"];
       return next();

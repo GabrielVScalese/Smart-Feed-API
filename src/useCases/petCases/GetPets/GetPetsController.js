@@ -3,6 +3,7 @@ const GetPetsCase = require("./GetPetsCase");
 module.exports = {
   async handle(req, res) {
     const userId = req.params.userId;
+    console.log("chegouuuuuuuuuuuuuuu");
 
     try {
       const getPetsCase = new GetPetsCase();

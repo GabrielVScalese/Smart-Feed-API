@@ -383,6 +383,52 @@
           }
         }
       }
+    },
+    "/refreshToken": {
+      "post": {
+        "summary": "Update token",
+        "description": "Generate token from refresh token.",
+        "tags": ["Refresh Token"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "id": {
+                    "type": "number"
+                  }
+                }
+              },
+              "examples": {
+                "refresh token": {
+                  "value": {
+                    "id": "c460ff32-a297-4f53-a3bf-7e303f67f880"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "token": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid refresh token"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -410,7 +456,8 @@
             "type": "string"
           },
           "verified": {
-            "type": "boolean"
+            "type": "boolean",
+            "default": "false"
           },
           "created_at": {
             "type": "string"

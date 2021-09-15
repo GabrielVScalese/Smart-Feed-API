@@ -12,7 +12,7 @@ class CreateQuantityCase {
     const quantitiesRepository = new QuantitiesRepository();
     const quantity = await quantitiesRepository.findByPetId(data["pet_id"]);
 
-    if (quantity.length == 1) throw new Error("Pet already has quantity");
+    if (quantity) throw new Error("Pet already has quantity");
 
     const newQuantity = await quantitiesRepository.save(data);
 

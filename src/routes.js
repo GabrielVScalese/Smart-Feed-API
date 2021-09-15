@@ -13,10 +13,14 @@ const UpdatePetController = require("./useCases/petCases/UpdatePet/UpdatePetCont
 const DeletePetController = require("./useCases/petCases/DeletePet/DeletePetController");
 const GetPetsController = require("./useCases/petCases/GetPets/GetPetsController");
 
+const CreateQuantityController = require("./useCases/quantityCases/CreateQuantity/CreateQuantityController");
+const GetQuantityCase = require("./useCases/quantityCases/GetQuantity/GetQuantityController");
+
 const CreateScheduleController = require("./useCases/scheduleCases/CreateSchedule/CreateScheduleController");
+const GetSchedulesController = require("./useCases/scheduleCases/GetSchedules/GetSchedulesController");
 
 const RefreshTokenController = require("./useCases/refreshTokenCases/CreateRefreshToken/RefreshTokenController");
-const GetSchedulesController = require("./useCases/scheduleCases/GetSchedules/GetSchedulesController");
+const GetQuantityController = require("./useCases/quantityCases/GetQuantity/GetQuantityController");
 
 routes.get("", (req, res) => {
   return res.json({ message: "Smart Feed API" });
@@ -34,6 +38,17 @@ routes.get(
   "/pets/findByOwner/:userId",
   ensureAuthenticated,
   GetPetsController.handle
+);
+
+routes.post(
+  "/quantities",
+  ensureAuthenticated,
+  CreateQuantityController.handle
+);
+routes.get(
+  "/quantities/:petId",
+  ensureAuthenticated,
+  GetQuantityController.handle
 );
 
 routes.post("/schedules", ensureAuthenticated, CreateScheduleController.handle);

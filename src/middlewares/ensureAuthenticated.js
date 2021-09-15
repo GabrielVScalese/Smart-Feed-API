@@ -8,8 +8,6 @@ module.exports = {
 
     const [, token] = authToken.split(" ");
 
-    console.log(token);
-
     try {
       const decoded = verify(token, process.env.SECRET_KEY);
 

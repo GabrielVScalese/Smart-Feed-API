@@ -1,6 +1,6 @@
-const RefreshTokensRepository = require("../../repositories/RefreshTokensRepository");
-const TokenProvider = require("../../providers/TokenProvider");
-const RefreshTokenProvider = require("../../providers/RefreshTokenProvider");
+const RefreshTokensRepository = require("../../../repositories/RefreshTokensRepository");
+const TokenProvider = require("../../../providers/TokenProvider");
+const RefreshTokenProvider = require("../../../providers/RefreshTokenProvider");
 const dayjs = require("dayjs");
 
 class RefreshTokenCase {

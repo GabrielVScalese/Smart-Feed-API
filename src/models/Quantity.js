@@ -11,11 +11,10 @@ class Quantity extends Model {
   }
 
   static associate(models) {
-    try {
-      this.belongsTo(models.Pet, { foreignKey: "pet_id", as: "pet" });
-    } catch (err) {
-      console.log("dsad");
-    }
+    this.belongsTo(models.Pet, {
+      foreignKey: "pet_id",
+      as: "pet",
+    });
   }
 }
 

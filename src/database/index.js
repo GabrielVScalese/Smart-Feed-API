@@ -13,6 +13,7 @@ const sequelize = new Sequelize(dbConfig);
 User.init(sequelize);
 
 Pet.init(sequelize);
+User.associate(sequelize.models);
 Pet.associate(sequelize.models);
 
 Mode.init(sequelize);

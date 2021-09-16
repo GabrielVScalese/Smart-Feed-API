@@ -51,6 +51,8 @@ class PetsRepository {
       where: {
         id: id,
       },
+      truncate: true,
+      cascade: true,
     });
   }
 }

@@ -1,5 +1,5 @@
 const PetsRepository = require("../../../repositories/PetsRepository");
-const CreateInformationsCase = require("../../alimentationCases/CreateInformations/CreateInformationsCase");
+const CreateInformationsCase = require("../../feedCases/CreateInformations/CreateInformationsCase");
 
 class CreatePetCase {
   async execute(data) {

@@ -19,11 +19,15 @@ class ModesRepository {
   }
 
   async update(petId, mode) {
-    await Mode.update(mode, {
-      where: {
-        pet_id: petId,
-      },
-    });
+    console.log("dasd");
+    await Mode.update(
+      { mode },
+      {
+        where: {
+          pet_id: petId,
+        },
+      }
+    );
   }
 }
 

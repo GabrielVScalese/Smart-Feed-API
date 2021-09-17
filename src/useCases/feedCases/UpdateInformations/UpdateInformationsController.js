@@ -15,9 +15,7 @@ module.exports = {
         schedules,
       });
 
-      return res
-        .status(200)
-        .json({ message: "Updated alimentation informations" });
+      return res.status(200).json({ message: "Updated feed informations" });
     } catch (err) {
       return res
         .status(400)

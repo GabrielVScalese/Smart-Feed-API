@@ -19,11 +19,14 @@ class QuantitiesRepository {
   }
 
   async update(petId, quantity) {
-    await Quantity.update(quantity, {
-      where: {
-        pet_id: petId,
-      },
-    });
+    await Quantity.update(
+      { quantity },
+      {
+        where: {
+          pet_id: petId,
+        },
+      }
+    );
   }
 }
 

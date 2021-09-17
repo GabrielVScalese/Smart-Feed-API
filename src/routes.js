@@ -13,7 +13,8 @@ const UpdatePetController = require("./useCases/petCases/UpdatePet/UpdatePetCont
 const DeletePetController = require("./useCases/petCases/DeletePet/DeletePetController");
 const GetPetsController = require("./useCases/petCases/GetPets/GetPetsController");
 
-const GetInformationsController = require("./useCases/alimentationCases/GetInformations/GetInformationsController");
+const UpdateInformationsController = require("./useCases/feedCases/UpdateInformations/UpdateInformationsController");
+const GetInformationsController = require("./useCases/feedCases/GetInformations/GetInformationsController");
 
 const RefreshTokenController = require("./useCases/refreshTokenCases/CreateRefreshToken/RefreshTokenController");
 
@@ -35,6 +36,11 @@ routes.get(
   GetPetsController.handle
 );
 
+routes.put(
+  "/alimentations/:petId",
+  ensureAuthenticated,
+  UpdateInformationsController.handle
+);
 routes.get(
   "/alimentations/:petId",
   ensureAuthenticated,

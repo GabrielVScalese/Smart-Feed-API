@@ -17,6 +17,14 @@ class QuantitiesRepository {
 
     return newQuantity;
   }
+
+  async update(petId, quantity) {
+    await Quantity.update(quantity, {
+      where: {
+        pet_id: petId,
+      },
+    });
+  }
 }
 
 module.exports = QuantitiesRepository;

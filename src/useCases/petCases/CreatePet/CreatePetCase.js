@@ -7,13 +7,13 @@ class CreatePetCase {
 
     const pet = await petsRepository.save(data);
 
-    // const createInformationsCase = new CreateInformationsCase();
-    // await createInformationsCase.execute({
-    //   pet_id: pet.get("id"),
-    //   mode: "Aproximação",
-    //   quantity: 50,
-    //   schedules: [],
-    // });
+    const createInformationsCase = new CreateInformationsCase();
+    await createInformationsCase.execute({
+      pet_id: pet.get("id"),
+      mode: "Horários",
+      quantity: 50,
+      schedules: [],
+    });
 
     return pet;
   }

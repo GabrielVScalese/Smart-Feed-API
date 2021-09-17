@@ -17,6 +17,14 @@ class ModesRepository {
 
     return newMode;
   }
+
+  async update(petId, mode) {
+    await Mode.update(mode, {
+      where: {
+        pet_id: petId,
+      },
+    });
+  }
 }
 
 module.exports = ModesRepository;

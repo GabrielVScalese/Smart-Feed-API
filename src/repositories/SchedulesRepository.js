@@ -27,6 +27,16 @@ class SchedulesRepository {
 
     return newSchedules;
   }
+
+  async update(petId, schedules) {
+    await Schedule.destroy({
+      where: {
+        pet_id: petId,
+      },
+    });
+
+    await this.save(petId, schedules);
+  }
 }
 
 module.exports = SchedulesRepository;

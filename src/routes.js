@@ -42,7 +42,7 @@ routes.put(
   UpdateInformationsController.handle
 );
 routes.get(
-  "/alimentations/:petId",
+  "/feeds/:petId",
   ensureAuthenticated,
   GetInformationsController.handle
 );

@@ -37,7 +37,7 @@ routes.get(
 );
 
 routes.put(
-  "/alimentations/:petId",
+  "/feeds/:petId",
   ensureAuthenticated,
   UpdateInformationsController.handle
 );

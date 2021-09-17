@@ -1,15 +1,15 @@
-const GetModeCase = require("./GetModeCase");
+const GetInformationsCase = require("./GetInformationsCase");
 
 module.exports = {
   async handle(req, res) {
     const petId = req.params.petId;
 
     try {
-      const getModeCase = new GetModeCase();
+      const getInformationsCase = new GetInformationsCase();
 
-      const mode = await getModeCase.execute(petId);
+      const informations = await getInformationsCase.execute(petId);
 
-      return res.json(mode);
+      return res.json(informations);
     } catch (err) {
       return res
         .status(400)

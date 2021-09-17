@@ -3,12 +3,13 @@ const Mode = require("../models/Mode");
 class ModesRepository {
   async findByPetId(petId) {
     const mode = await Mode.findOne({
+      attributes: ["mode"],
       where: {
         pet_id: petId,
       },
     });
 
-    return mode;
+    return mode.get("mode");
   }
 
   async save(mode) {

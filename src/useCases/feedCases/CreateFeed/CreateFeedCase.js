@@ -1,14 +1,12 @@
 const PetsRepository = require("../../../repositories/PetsRepository");
-
 const ModesRepository = require("../../../repositories/ModesRepository");
 const QuantitiesRepository = require("../../../repositories/QuantitiesRepository");
 const SchedulesRepository = require("../../../repositories/SchedulesRepository");
 
-class GetInformationsCase {
+class CreateFeedCase {
   async execute(data) {
     const petsRepository = new PetsRepository();
-
-    const pet = await petsRepository.findById(data);
+    const pet = await petsRepository.findById(data["pet_id"]);
 
     if (!pet) throw new Error("Nonexistent pet");
 
@@ -16,17 +14,28 @@ class GetInformationsCase {
     const quantitiesRepository = new QuantitiesRepository();
     const schedulesRepository = new SchedulesRepository();
 
-    const mode = await modesRepository.findByPetId(data);
-    const quantity = await quantitiesRepository.findByPetId(data);
-    const schedules = await schedulesRepository.findByPetId(data);
+    const newMode = await modesRepository.save({
+      pet_id: data["pet_id"],
+      mode: data["mode"],
+    });
+
+    const newQuantity = await quantitiesRepository.save({
+      pet_id: data["pet_id"],
+      quantity: data["quantity"],
+    });
+
+    const schedules = await schedulesRepository.save(
+      data["pet_id"],
+      data["schedules"]
+    );
 
     return {
-      pet_id: data,
-      mode,
-      quantity,
+      pet_id: data["pet_id"],
+      mode: newMode.get("mode"),
+      quantity: newQuantity.get("quantity"),
       schedules,
     };
   }
 }
 
-module.exports = GetInformationsCase;
+module.exports = CreateFeedCase;

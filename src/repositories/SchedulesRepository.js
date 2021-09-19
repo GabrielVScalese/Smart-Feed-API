@@ -1,17 +1,25 @@
 const Schedule = require("../models/Schedule");
 
 class SchedulesRepository {
-  async findByPetId(petId) {
-    const schedules = await Schedule.findAll({
-      attributes: ["time"],
-      where: {
-        pet_id: petId,
-      },
-    });
+  async findByPetIds(petIds) {
+    let petsSchedules = [];
 
-    return schedules.map(function (schedule) {
-      return schedule.get("time");
-    });
+    for (let i = 0; i < petIds.length; i++) {
+      const petSchedules = await Schedule.findAll({
+        attributes: ["time"],
+        where: {
+          pet_id: petIds[i],
+        },
+      });
+
+      petsSchedules.push(
+        petSchedules.map(function (val, index) {
+          return val.get("time");
+        })
+      );
+    }
+
+    return petsSchedules;
   }
 
   async save(petId, schedules) {

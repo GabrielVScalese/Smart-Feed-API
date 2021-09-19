@@ -1,15 +1,15 @@
 const Quantity = require("../models/Quantity");
 
 class QuantitiesRepository {
-  async findByPetId(petId) {
-    const quantity = await Quantity.findOne({
+  async findByPetIds(petIds) {
+    const quantities = await Quantity.findAll({
       attributes: ["quantity"],
       where: {
-        pet_id: petId,
+        pet_id: petIds,
       },
     });
 
-    return quantity.get("quantity");
+    return quantities;
   }
 
   async save(quantity) {

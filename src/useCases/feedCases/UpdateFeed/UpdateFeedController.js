@@ -1,4 +1,4 @@
-const UpdateInformationsCase = require("./UpdateInformationsCase");
+const UpdateFeedCase = require("./UpdateFeedCase");
 
 module.exports = {
   async handle(req, res) {
@@ -6,9 +6,9 @@ module.exports = {
     const { mode, quantity, schedules } = req.body;
 
     try {
-      const updateInformationsCase = new UpdateInformationsCase();
+      const updateFeedCase = new UpdateFeedCase();
 
-      await updateInformationsCase.execute({
+      await updateFeedCase.execute({
         pet_id: petId,
         mode,
         quantity,

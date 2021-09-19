@@ -3,7 +3,7 @@ const ModesRepository = require("../../../repositories/ModesRepository.js");
 const QuantitiesRepository = require("../../../repositories/QuantitiesRepository");
 const SchedulesRepository = require("../../../repositories/SchedulesRepository");
 
-class UpdateInformationsCase {
+class UpdateFeedCase {
   async execute(data) {
     const petsRepository = new PetsRepository();
     const pet = await petsRepository.findById(data["pet_id"]);
@@ -20,4 +20,4 @@ class UpdateInformationsCase {
   }
 }
 
-module.exports = UpdateInformationsCase;
+module.exports = UpdateFeedCase;

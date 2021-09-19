@@ -38,7 +38,6 @@ class UsersRepository {
 
   async update(user) {
     const passwordHash = await hash(user["password"], 8);
-
     await User.update(
       {
         name: user["name"],

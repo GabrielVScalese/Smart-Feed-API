@@ -17,6 +17,8 @@ class User extends Model {
     this.hasMany(models.Pet, {
       foreignKey: "user_id",
       as: "pets",
+      hooks: true,
+      onDelete: "cascade",
     });
   }
 }

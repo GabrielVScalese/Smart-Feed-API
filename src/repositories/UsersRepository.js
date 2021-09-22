@@ -1,6 +1,5 @@
 const User = require("../models/User");
 const { hash } = require("bcryptjs");
-const { options } = require("../models/User");
 
 class UsersRepository {
   async findByEmail(email) {
@@ -53,8 +52,7 @@ class UsersRepository {
       where: {
         id: id,
       },
-      truncate: true,
-      cascade: true,
+      hooks: true,
     });
   }
 }

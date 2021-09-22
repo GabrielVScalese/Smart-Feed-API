@@ -1,3 +1,4 @@
+const UsersRepository = require("../../../repositories/UsersRepository");
 const PetsRepository = require("../../../repositories/PetsRepository");
 const ModesRepository = require("../../../repositories/ModesRepository");
 const QuantitiesRepository = require("../../../repositories/QuantitiesRepository");
@@ -5,6 +6,11 @@ const SchedulesRepository = require("../../../repositories/SchedulesRepository")
 
 class GetFeedsCase {
   async execute(data) {
+    const usersRepository = new UsersRepository();
+    const user = await usersRepository.findById(data);
+
+    if (!user) throw new Error("Nonexistent user");
+
     const petsRepository = new PetsRepository();
 
     let pets = await petsRepository.findByUserId(data);

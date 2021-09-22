@@ -12,8 +12,9 @@ class Quantity extends Model {
 
   static associate(models) {
     this.belongsTo(models.Pet, {
+      onDelete: "cascade",
       foreignKey: "pet_id",
-      as: "pet",
+      allowNull: false,
     });
   }
 }

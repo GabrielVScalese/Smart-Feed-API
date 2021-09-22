@@ -14,6 +14,7 @@ class Schedule extends Model {
     this.belongsTo(models.Pet, {
       foreignKey: "pet_id",
       as: "pet",
+      onDelete: "CASCADE",
     });
   }
 }

@@ -10,7 +10,7 @@ class CreatePetCase {
     const createInformationsCase = new CreateInformationsCase();
     await createInformationsCase.execute({
       pet_id: pet.get("id"),
-      mode: "Horários",
+      mode: "Horário",
       quantity: 50,
       schedules: [],
     });

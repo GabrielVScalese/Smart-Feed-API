@@ -6,6 +6,9 @@ class GetStatisticsCase {
 
     const consumptions = await consumptionsRepository.findByPetId(data);
 
+    if (consumptions.length == 0)
+      throw Error("Without consumptions for statistics");
+
     const minDate = new Date(consumptions[0]["date"]);
     const maxDate = new Date(consumptions.pop()["date"]);
 

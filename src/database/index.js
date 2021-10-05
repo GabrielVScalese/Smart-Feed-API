@@ -6,6 +6,7 @@ const Pet = require("../models/Pet.js");
 const Mode = require("../models/Mode.js");
 const Quantity = require("../models/Quantity.js");
 const Schedule = require("../models/Schedule.js");
+const Consumption = require("../models/Consumption");
 const RefreshToken = require("../models/RefreshToken");
 
 const sequelize = new Sequelize(dbConfig);
@@ -27,5 +28,8 @@ Schedule.associate(sequelize.models);
 
 RefreshToken.init(sequelize);
 RefreshToken.associate(sequelize.models);
+
+Consumption.init(sequelize);
+Consumption.associate(sequelize.models);
 
 module.exports = sequelize;

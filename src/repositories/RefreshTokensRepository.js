@@ -3,6 +3,7 @@ const RefreshToken = require("../models/RefreshToken");
 class RefreshTokensRepository {
   async findById(id) {
     const refreshToken = await RefreshToken.findOne({
+      attributes: ["id", "user_id", "expires_in"],
       where: {
         id: id,
       },

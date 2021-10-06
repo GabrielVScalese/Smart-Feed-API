@@ -3,6 +3,11 @@ const ConsumptionsRepository = require("../../../repositories/ConsumptionsReposi
 
 class CreateConsumptionCase {
   async execute(data) {
+    const petsRepository = new PetsRepository();
+    const pet = await petsRepository.findById(data["pet_id"]);
+
+    if (!pet) throw Error("Nonexistent pet");
+
     const consumptionsRepository = new ConsumptionsRepository();
 
     const newConsumption = await consumptionsRepository.save(data);

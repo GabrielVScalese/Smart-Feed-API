@@ -63,7 +63,6 @@ routes.get(
 routes.post(
   "/consumptions",
   ensureAuthenticated,
-  verifyPet,
   CreateConsumptionController.handle
 );
 routes.get(

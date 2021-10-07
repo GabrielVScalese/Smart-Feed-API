@@ -56,7 +56,6 @@ routes.put(
 routes.get(
   "/feeds/findByOwner/:userId",
   ensureAuthenticated,
-  verifyPet,
   GetFeedsController.handle
 );
 

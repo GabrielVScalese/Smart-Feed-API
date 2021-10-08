@@ -3,7 +3,7 @@ const Pet = require("../models/Pet");
 class PetsRepository {
   async findByUserId(userId) {
     const pets = await Pet.findAll({
-      attributes: ["id", "name", "ration", "size", "device", "image"],
+      attributes: ["id", "name", "animal", "ration", "size", "device", "image"],
       where: {
         user_id: userId,
       },

@@ -28,7 +28,7 @@ const GetStatisticsController = require("./useCases/consumptionsCases/GetStatist
 // Refresh Token
 const RefreshTokenController = require("./useCases/refreshTokenCases/CreateRefreshToken/RefreshTokenController");
 
-// Routes
+Routes;
 routes.get("", (req, res) => {
   return res.json({ message: "Smart Feed API" });
 });

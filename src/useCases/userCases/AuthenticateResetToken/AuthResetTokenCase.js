@@ -2,7 +2,7 @@ const ResetTokensRepository = require("../../../repositories/ResetTokensReposito
 const { verify } = require("jsonwebtoken");
 const dayjs = require("dayjs");
 
-class ResetTokenCase {
+class AuthResetTokenCase {
   async execute(data) {
     try {
       const resetTokensRepository = new ResetTokensRepository();
@@ -28,4 +28,4 @@ class ResetTokenCase {
   }
 }
 
-module.exports = ResetTokenCase;
+module.exports = AuthResetTokenCase;

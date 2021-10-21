@@ -10,7 +10,7 @@ const UpdateUserController = require("./useCases/userCases/UpdateUser/UpdateUser
 const DeleteUserController = require("./useCases/userCases/DeleteUser/DeleteUserController");
 const AuthenticateUserController = require("./useCases/userCases/AuthenticateUser/AuthenticateUserController");
 const ResetPasswordController = require("./useCases/userCases/ResetPassword/ResetPasswordController");
-const ResetTokenController = require("./useCases/userCases/AuthenticateResetToken/ResetTokenController");
+const AuthResetTokenController = require("./useCases/userCases/AuthenticateResetToken/AuthResetTokenController");
 
 // Pet
 const CreatePetController = require("./useCases/petCases/CreatePet/CreatePetController");
@@ -40,7 +40,7 @@ routes.put("/users/:id", ensureAuthenticated, UpdateUserController.handle);
 routes.delete("/users/:id", ensureAuthenticated, DeleteUserController.handle);
 routes.post("/users/authenticate", AuthenticateUserController.handle);
 routes.post("/users/resetPassword", ResetPasswordController.handle);
-routes.post("/users/verifyResetToken", ResetTokenController.handle);
+routes.post("/users/verifyResetTokenId", AuthResetTokenController.handle);
 
 routes.post("/pets", ensureAuthenticated, CreatePetController.handle);
 routes.put("/pets/:id", ensureAuthenticated, UpdatePetController.handle);

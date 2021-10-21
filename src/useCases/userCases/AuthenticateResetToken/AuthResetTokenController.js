@@ -1,4 +1,4 @@
-const ResetTokenCase = require("./ResetTokenCase");
+const ResetTokenCase = require("./AuthResetTokenCase");
 
 module.exports = {
   async handle(req, res) {

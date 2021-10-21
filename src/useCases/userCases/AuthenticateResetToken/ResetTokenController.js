@@ -1,14 +1,14 @@
 const ResetTokenCase = require("./ResetTokenCase");
 
 module.exports = {
-  handle(req, res) {
-    const { token } = req.body;
+  async handle(req, res) {
+    const { resetTokenId } = req.body;
 
     try {
       const resetTokenCase = new ResetTokenCase();
-      const decoded = resetTokenCase.execute({ token });
+      const decoded = await resetTokenCase.execute({ resetTokenId });
 
-      return res.status(200).json({ decoded });
+      return res.status(200).json(decoded);
     } catch (err) {
       return res
         .status(400)

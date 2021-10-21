@@ -1,5 +1,9 @@
-const UsersRepository = require("../../../repositories/UsersRepository");
+const dayjs = require("dayjs");
 const { sign } = require("jsonwebtoken");
+const { v4 } = require("uuid");
+
+const UsersRepository = require("../../../repositories/UsersRepository");
+const ResetTokensRepository = require("../../../repositories/ResetTokensRepository");
 const MailProvider = require("../../../providers/MailProvider");
 
 class ResetPasswordCase {
@@ -9,6 +13,9 @@ class ResetPasswordCase {
 
     if (!user) throw new Error("Nonexistent user");
 
+    const resetTokensRepository = new ResetTokensRepository();
+    await resetTokensRepository.destroyByUserId(user["id"]);
+
     const token = sign(
       {
         id: user["id"],
@@ -16,11 +23,19 @@ class ResetPasswordCase {
         email: user["email"],
       },
       process.env.SECRET_KEY,
-      { expiresIn: 300 }
+      { expiresIn: 86400 }
     );
 
+    const expiresIn = dayjs().add(1, "day").unix();
+    const resetToken = await resetTokensRepository.save({
+      id: v4(),
+      token: token,
+      expires_in: expiresIn,
+      user_id: user["id"],
+    });
+
     const mailProvider = new MailProvider();
-    mailProvider.sendEmail({
+    await mailProvider.sendEmail({
       to: {
         name: user["name"],
         email: user["email"],
@@ -30,10 +45,10 @@ class ResetPasswordCase {
         email: process.env.EMAIL,
       },
       subject: "Recuperar senha da conta",
-      body: `<p>Olá ${user["name"]}, acesse link para recuperar sua senha: <a>http://localhost:3000/${token}</a></p>`,
+      body: `<p>Olá ${user["name"]}, acesse link para recuperar sua senha: <a>http://localhost:3000/${resetToken["id"]}</a></p>`,
     });
 
-    return token;
+    return resetToken["id"];
   }
 }
 

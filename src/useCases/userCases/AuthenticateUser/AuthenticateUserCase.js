@@ -2,7 +2,6 @@ const UsersRepository = require("../../../repositories/UsersRepository");
 const TokenProvider = require("../../../providers/TokenProvider");
 const RefreshTokenProvider = require("../../../providers/RefreshTokenProvider");
 const { compare } = require("bcryptjs");
-const RefreshTokensRepository = require("../../../repositories/RefreshTokensRepository");
 
 class AuthenticateUserCase {
   async execute(data) {

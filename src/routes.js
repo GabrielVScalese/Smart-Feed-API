@@ -1,6 +1,7 @@
 const express = require("express");
 const routes = express.Router();
 
+const { verify } = require("jsonwebtoken");
 const { ensureAuthenticated } = require("./middlewares/ensureAuthenticated");
 const { verifyPet } = require("./middlewares/verifyPet");
 
@@ -9,6 +10,8 @@ const CreateUserController = require("./useCases/userCases/CreateUser/CreateUser
 const UpdateUserController = require("./useCases/userCases/UpdateUser/UpdateUserController");
 const DeleteUserController = require("./useCases/userCases/DeleteUser/DeleteUserController");
 const AuthenticateUserController = require("./useCases/userCases/AuthenticateUser/AuthenticateUserController");
+const ResetPasswordController = require("./useCases/userCases/ResetPassword/ResetPasswordController");
+const ResetTokenController = require("./useCases/userCases/AuthenticateResetToken/ResetTokenController");
 
 // Pet
 const CreatePetController = require("./useCases/petCases/CreatePet/CreatePetController");
@@ -37,6 +40,8 @@ routes.post("/users", CreateUserController.handle);
 routes.put("/users/:id", ensureAuthenticated, UpdateUserController.handle);
 routes.delete("/users/:id", ensureAuthenticated, DeleteUserController.handle);
 routes.post("/users/authenticate", AuthenticateUserController.handle);
+routes.post("/users/resetPassword", ResetPasswordController.handle);
+routes.post("/users/verifyResetToken", ResetTokenController.handle);
 
 routes.post("/pets", ensureAuthenticated, CreatePetController.handle);
 routes.put("/pets/:id", ensureAuthenticated, UpdatePetController.handle);

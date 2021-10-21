@@ -1,7 +1,6 @@
 const express = require("express");
 const routes = express.Router();
 
-const { verify } = require("jsonwebtoken");
 const { ensureAuthenticated } = require("./middlewares/ensureAuthenticated");
 const { verifyPet } = require("./middlewares/verifyPet");
 

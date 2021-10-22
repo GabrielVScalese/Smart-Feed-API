@@ -19,8 +19,6 @@ class AuthResetTokenCase {
       const decoded = verify(resetToken["token"], process.env.SECRET_KEY);
       decoded["token"] = resetToken["token"];
 
-      await resetTokensRepository.destroyById(resetToken["id"]);
-
       return decoded;
     } catch (err) {
       throw new Error("Invalid reset token id");

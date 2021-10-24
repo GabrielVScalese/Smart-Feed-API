@@ -9,7 +9,6 @@
     "node": "14.x"
   },
   "scripts": {
-    "start": "node src/server.js",
     "dev": "nodemon src/server.js",
     "swagger-autogen": "node src/swagger.js"
   },

@@ -32,7 +32,7 @@ const GetStatisticsController = require("./useCases/consumptionsCases/GetStatist
 const RefreshTokenController = require("./useCases/refreshTokenCases/CreateRefreshToken/RefreshTokenController");
 
 // Routes
-routes.get("", (req, res) => {
+routes.get("/", (req, res) => {
   return res.json({ message: "Smart Feed API" });
 });
 

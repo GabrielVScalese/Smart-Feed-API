@@ -36,4 +36,6 @@ Consumption.associate(sequelize.models);
 ResetToken.init(sequelize);
 ResetToken.associate(sequelize.models);
 
+sequelize.sync();
+
 module.exports = sequelize;

@@ -45,7 +45,7 @@ class ResetPasswordCase {
         email: process.env.EMAIL,
       },
       subject: "Recuperar senha da conta",
-      body: `<p>Olá ${user["name"]}, acesse link para recuperar sua senha: <a>http://localhost:3000/${resetToken["id"]}</a></p>`,
+      body: `<p>Olá ${user["name"]}, acesse esse link para recuperar sua senha: <a>http://localhost:3000/users/editPassword/${resetToken["id"]}</a></p>`,
     });
 
     return resetToken["id"];

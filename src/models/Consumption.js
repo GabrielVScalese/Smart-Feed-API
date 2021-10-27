@@ -4,7 +4,7 @@ class Consumption extends Model {
   static init(sequelize) {
     super.init(
       {
-        quantity: DataTypes.STRING,
+        quantity: DataTypes.INTEGER,
         date: DataTypes.DATE,
       },
       { sequelize }

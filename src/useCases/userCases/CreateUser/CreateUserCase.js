@@ -34,7 +34,9 @@ class CreateUserCase {
       body: `<p>Olá ${new_user["name"]}, acesse esse link para ativar sua conta: <a>https://smart-feed-web.vercel.app/users/activateAccount/${activationId["id"]}</a></p>`,
     });
 
-    return new_user;
+    const user = new_user.get();
+    user["activationId"] = activationId["id"];
+    return user;
   }
 }
 

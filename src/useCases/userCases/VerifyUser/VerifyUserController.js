@@ -2,11 +2,11 @@ const VerifyUserCase = require("./VerifyUserCase");
 
 module.exports = {
   async handle(req, res) {
-    const { email } = req.body;
+    const { activationId } = req.body;
 
     try {
       const verifyUserCase = new VerifyUserCase();
-      await verifyUserCase.execute({ email });
+      await verifyUserCase.execute({ activationId });
 
       return res.status(200).json({ message: "Verified user" });
     } catch (err) {

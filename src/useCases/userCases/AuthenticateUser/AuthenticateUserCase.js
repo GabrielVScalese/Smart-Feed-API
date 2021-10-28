@@ -10,6 +10,9 @@ class AuthenticateUserCase {
 
     if (!userAlreadyExists) throw new Error("Nonexistent user");
 
+    if (!userAlreadyExists["verified"])
+      throw new Error("User account is not verified");
+
     const passwordMatch = await compare(
       data["password"],
       userAlreadyExists["password"]

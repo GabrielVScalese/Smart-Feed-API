@@ -4,7 +4,7 @@ const { hash } = require("bcryptjs");
 class UsersRepository {
   async findByEmail(email) {
     const user = await User.findOne({
-      attributes: ["id", "name", "email", "password"],
+      attributes: ["id", "name", "email", "password", "verified"],
       where: {
         email: email,
       },
@@ -38,15 +38,23 @@ class UsersRepository {
   }
 
   async update(user) {
-    const passwordHash = await hash(user["password"], 8);
-    await User.update(
-      {
-        name: user["name"],
-        email: user["email"],
-        password: passwordHash,
-      },
-      { where: { id: user["id"] } }
-    );
+    if (user["verified"] == undefined) {
+      const passwordHash = await hash(user["password"], 8);
+      await User.update(
+        {
+          name: user["name"],
+          email: user["email"],
+          password: passwordHash,
+        },
+        { where: { id: user["id"] } }
+      );
+    } else
+      await User.update(
+        {
+          verified: user["verified"],
+        },
+        { where: { id: user["id"] } }
+      );
   }
 
   async destroy(id) {

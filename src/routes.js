@@ -12,6 +12,7 @@ const AuthenticateUserController = require("./useCases/userCases/AuthenticateUse
 const ResetPasswordController = require("./useCases/userCases/ResetPassword/ResetPasswordController");
 const AuthResetTokenController = require("./useCases/userCases/AuthenticateResetToken/AuthResetTokenController");
 const DeleteResetTokenController = require("./useCases/userCases/DeleteResetToken/DeleteResetTokenController");
+const VerifyUserController = require("./useCases/userCases/VerifyUser/VerifyUserController");
 
 // Pet
 const CreatePetController = require("./useCases/petCases/CreatePet/CreatePetController");
@@ -46,6 +47,7 @@ routes.delete(
   "/users/deleteResetToken/:resetTokenId",
   DeleteResetTokenController.handle
 );
+routes.post("/users/verifyUser", VerifyUserController.handle);
 
 routes.post("/pets", ensureAuthenticated, CreatePetController.handle);
 routes.put("/pets/:id", ensureAuthenticated, UpdatePetController.handle);

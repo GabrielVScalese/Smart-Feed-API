@@ -23,7 +23,7 @@ class ResetPasswordCase {
         email: user["email"],
       },
       process.env.SECRET_KEY,
-      { expiresIn: 86400 }
+      { expiresIn: 300 }
     );
 
     const expiresIn = dayjs().add(1, "day").unix();

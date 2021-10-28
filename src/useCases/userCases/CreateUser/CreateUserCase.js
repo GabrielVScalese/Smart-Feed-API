@@ -1,5 +1,8 @@
 const MailProvider = require("../../../providers/MailProvider");
+const ActivationIdsRepository = require("../../../repositories/ActivationIdsRepository");
 const UsersRepository = require("../../../repositories/UsersRepository");
+
+const { v4 } = require("uuid");
 
 class CreateUserCase {
   async execute(data) {
@@ -11,22 +14,25 @@ class CreateUserCase {
 
     const new_user = await usersRepository.save(data);
 
-    // const mailProvider = new MailProvider();
-    // await mailProvider.sendEmail({
-    //   to: {
-    //     name: data["name"],
-    //     email: data["email"],
-    //   },
-    //   from: {
-    //     name: "Equipe do Smart Feed",
-    //     email: process.env.EMAIL,
-    //   },
-    //   subject: "Seja bem vindo ao nosso app",
-    //   body:
-    //     "<p><strong>Olá, " +
-    //     data["name"] +
-    //     "</strong></p><p>Bem vindo, </p> <p>Primeiramente, antes de utilizar nosso app, <strong>você precisa ativar sua conta</strong></p><div style='justify-content: center; display: flex;'><input type='button' value='ATIVAR CONTA' style='background-color: #0099ff; height: 9vh; width: 70%;color: white; font-weight: bold;'></div>",
-    // });
+    const activationIdsRepository = new ActivationIdsRepository();
+    const activationId = await activationIdsRepository.save({
+      id: v4(),
+      user_id: new_user["id"],
+    });
+
+    const mailProvider = new MailProvider();
+    await mailProvider.sendEmail({
+      to: {
+        name: data["name"],
+        email: data["email"],
+      },
+      from: {
+        name: "Equipe do Smart Feed",
+        email: process.env.EMAIL,
+      },
+      subject: "Seja bem vindo ao nosso app",
+      body: `<p>Olá ${new_user["name"]}, acesse esse link para ativar sua conta: <a>https://smart-feed-web.vercel.app/users/activateAccount/${activationId["id"]}</a></p>`,
+    });
 
     return new_user;
   }

@@ -9,6 +9,7 @@ const Schedule = require("../models/Schedule.js");
 const Consumption = require("../models/Consumption");
 const RefreshToken = require("../models/RefreshToken");
 const ResetToken = require("../models/ResetToken");
+const ActivationId = require("../models/ActivationId");
 
 const sequelize = new Sequelize(dbConfig);
 
@@ -36,6 +37,9 @@ Consumption.associate(sequelize.models);
 ResetToken.init(sequelize);
 ResetToken.associate(sequelize.models);
 
-sequelize.sync();
+ActivationId.init(sequelize);
+ActivationId.associate(sequelize.models);
+
+// sequelize.sync();
 
 module.exports = sequelize;

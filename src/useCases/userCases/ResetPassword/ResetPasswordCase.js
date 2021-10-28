@@ -41,7 +41,7 @@ class ResetPasswordCase {
         email: user["email"],
       },
       from: {
-        name: "Smart Feed",
+        name: "Equipe do Smart Feed",
         email: process.env.EMAIL,
       },
       subject: "Recuperar senha da conta",

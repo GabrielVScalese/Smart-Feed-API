@@ -1,7 +1,11 @@
 const UsersRepository = require("../../../repositories/UsersRepository");
 const TokenProvider = require("../../../providers/TokenProvider");
 const RefreshTokenProvider = require("../../../providers/RefreshTokenProvider");
+const ActivationIdsRepository = require("../../../repositories/ActivationIdsRepository");
+
+const dayjs = require("dayjs");
 const { compare } = require("bcryptjs");
+const ActivationIdProvider = require("../../../providers/ActivationIdProvider");
 
 class AuthenticateUserCase {
   async execute(data) {
@@ -10,8 +14,21 @@ class AuthenticateUserCase {
 
     if (!userAlreadyExists) throw new Error("Nonexistent user");
 
-    if (!userAlreadyExists["verified"])
+    if (!userAlreadyExists["verified"]) {
+      const activationIdsRepository = new ActivationIdsRepository();
+      const activationId = await activationIdsRepository.findById(
+        userAlreadyExists["id"]
+      );
+
+      const isExpired = dayjs().isAfter(dayjs.unix(activationId["expires_in"]));
+
+      if (isExpired) {
+        const activationIdProvider = new ActivationIdProvider();
+        await activationIdProvider.execute(userAlreadyExists);
+      }
+
       throw new Error("A conta não foi verificada ainda");
+    }
 
     const passwordMatch = await compare(
       data["password"],

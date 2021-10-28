@@ -8,6 +8,18 @@ class ActivationIdsRepository {
       },
     });
 
+    if (!activationId) throw new Error("Nonexistent activation id");
+
+    return activationId;
+  }
+
+  async findByUserId(userId) {
+    const activationId = await ActivationId.findOne({
+      where: {
+        user_id: userId,
+      },
+    });
+
     return activationId;
   }
 

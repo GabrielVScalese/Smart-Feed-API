@@ -26,7 +26,7 @@ class ResetPasswordCase {
       { expiresIn: 300 }
     );
 
-    const expiresIn = dayjs().add(1, "day").unix();
+    const expiresIn = dayjs().add(5, "minute").unix();
     const resetToken = await resetTokensRepository.save({
       id: v4(),
       token: token,

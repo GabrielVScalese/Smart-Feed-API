@@ -5,6 +5,7 @@ class ActivationId extends Model {
     super.init(
       {
         id: { type: DataTypes.STRING, primaryKey: true },
+        expires_in: { type: DataTypes.INTEGER },
       },
       { sequelize }
     );

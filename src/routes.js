@@ -47,7 +47,7 @@ routes.delete(
   "/users/deleteResetToken/:resetTokenId",
   DeleteResetTokenController.handle
 );
-routes.post("/users/verifyUser", VerifyUserController.handle);
+routes.post("/users/activateAccount", VerifyUserController.handle);
 
 routes.post("/pets", ensureAuthenticated, CreatePetController.handle);
 routes.put("/pets/:id", ensureAuthenticated, UpdatePetController.handle);

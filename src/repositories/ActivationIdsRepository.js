@@ -8,8 +8,6 @@ class ActivationIdsRepository {
       },
     });
 
-    if (!activationId) throw new Error("Nonexistent activation id");
-
     return activationId;
   }
 

@@ -40,6 +40,4 @@ ResetToken.associate(sequelize.models);
 ActivationId.init(sequelize);
 ActivationId.associate(sequelize.models);
 
-sequelize.sync();
-
 module.exports = sequelize;

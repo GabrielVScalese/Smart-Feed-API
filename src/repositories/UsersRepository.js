@@ -38,7 +38,10 @@ class UsersRepository {
   }
 
   async update(user) {
-    if (user["verified"] == undefined) {
+    const id = user["id"];
+    delete user["id"];
+
+    if (user["password"]) {
       const passwordHash = await hash(user["password"], 8);
       await User.update(
         {
@@ -46,15 +49,9 @@ class UsersRepository {
           email: user["email"],
           password: passwordHash,
         },
-        { where: { id: user["id"] } }
+        { where: { id: id } }
       );
-    } else
-      await User.update(
-        {
-          verified: user["verified"],
-        },
-        { where: { id: user["id"] } }
-      );
+    } else await User.update(user, { where: { id: id } });
   }
 
   async destroy(id) {

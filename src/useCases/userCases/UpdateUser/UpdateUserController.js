@@ -4,6 +4,7 @@ module.exports = {
   async handle(req, res) {
     const id = req.params.id;
     const user = req.body;
+    user["id"] = id;
 
     try {
       const updateUserCase = new UpdateUserCase();

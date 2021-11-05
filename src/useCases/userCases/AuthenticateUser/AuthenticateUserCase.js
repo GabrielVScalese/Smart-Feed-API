@@ -14,7 +14,6 @@ class AuthenticateUserCase {
 
     if (!userAlreadyExists) throw new Error("Nonexistent user");
 
-    console.log(userAlreadyExists);
     if (!userAlreadyExists["verified"]) {
       const activationIdsRepository = new ActivationIdsRepository();
       const activationId = await activationIdsRepository.findByUserId(
@@ -36,7 +35,6 @@ class AuthenticateUserCase {
       userAlreadyExists["password"]
     );
 
-    console.log("da");
     if (!passwordMatch) throw new Error("Unauthorized user");
 
     const tokenProvider = new TokenProvider();

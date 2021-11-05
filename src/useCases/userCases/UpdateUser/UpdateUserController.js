@@ -3,12 +3,12 @@ const UpdateUserCase = require("./UpdateUserCase");
 module.exports = {
   async handle(req, res) {
     const id = req.params.id;
-    const { name, email, password } = req.body;
+    const user = req.body;
 
     try {
       const updateUserCase = new UpdateUserCase();
 
-      await updateUserCase.execute({ id, name, email, password });
+      await updateUserCase.execute(user);
 
       return res.status(200).json({ message: "Updated user" });
     } catch (err) {

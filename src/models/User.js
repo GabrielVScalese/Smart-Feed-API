@@ -8,6 +8,7 @@ class User extends Model {
         email: DataTypes.STRING,
         password: DataTypes.STRING,
         verified: DataTypes.BOOLEAN,
+        image: DataTypes.STRING,
       },
       { sequelize }
     );

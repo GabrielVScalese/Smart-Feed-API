@@ -4,7 +4,7 @@ const { hash } = require("bcryptjs");
 class UsersRepository {
   async findByEmail(email) {
     const user = await User.findOne({
-      attributes: ["id", "name", "email", "password", "verified"],
+      attributes: ["id", "name", "email", "password", "image", "verified"],
       where: {
         email: email,
       },

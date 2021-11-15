@@ -1,15 +1,16 @@
 const Mode = require("../models/Mode");
 
 class ModesRepository {
-  async findByPetIds(petIds) {
-    const modes = await Mode.findAll({
+  async findByPetId(petId) {
+    const mode = await Mode.findOne({
       attributes: ["mode"],
       where: {
-        pet_id: petIds,
+        pet_id: petId,
       },
+      raw: true,
     });
 
-    return modes;
+    return mode["mode"];
   }
 
   async save(mode) {

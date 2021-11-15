@@ -22,7 +22,6 @@ const GetPetsController = require("./useCases/petCases/GetPets/GetPetsController
 
 // Feed
 const UpdateFeedController = require("./useCases/feedCases/UpdateFeed/UpdateFeedController");
-const GetFeedsController = require("./useCases/feedCases/GetFeeds/GetFeedsController");
 
 // Consumption
 const CreateConsumptionController = require("./useCases/consumptionsCases/CreateConsumption/CreateConsumptionController");
@@ -49,6 +48,7 @@ routes.delete(
 );
 routes.post("/users/activateAccount", VerifyUserController.handle);
 
+routes.get("/pets/:id", ensureAuthenticated, CreatePetController.handle);
 routes.post("/pets", ensureAuthenticated, CreatePetController.handle);
 routes.put("/pets/:id", ensureAuthenticated, UpdatePetController.handle);
 routes.delete("/pets/:id", ensureAuthenticated, DeletePetController.handle);
@@ -64,12 +64,6 @@ routes.put(
   verifyPet,
   UpdateFeedController.handle
 );
-routes.get(
-  "/feeds/findByOwner/:userId",
-  ensureAuthenticated,
-  GetFeedsController.handle
-);
-
 routes.post(
   "/consumptions",
   ensureAuthenticated,

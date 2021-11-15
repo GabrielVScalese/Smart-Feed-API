@@ -7,6 +7,7 @@ class PetsRepository {
       where: {
         user_id: userId,
       },
+      raw: true,
     });
 
     return pets;
@@ -17,6 +18,7 @@ class PetsRepository {
       where: {
         id: id,
       },
+      raw: true,
     });
 
     return pet;

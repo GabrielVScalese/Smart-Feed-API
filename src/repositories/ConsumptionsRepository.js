@@ -61,7 +61,7 @@ class ConsumptionsRepository {
       },
     });
 
-    return consumptionAverage[0].get("consumptionAverage");
+    return parseFloat(consumptionAverage[0].get("consumptionAverage"));
   }
 }
 

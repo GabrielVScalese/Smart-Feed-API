@@ -12,8 +12,7 @@ class GetStatisticsCase {
     const minDate = new Date(consumptions[0]["date"]);
     const maxDate = new Date(consumptions.pop()["date"]);
 
-    const diffTime = Math.abs(maxDate - minDate);
-    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    const diffDays = maxDate.getDate() - minDate.getDate() + 1;
 
     const greaterConsumption =
       await consumptionsRepository.findGreaterConsumption(data);

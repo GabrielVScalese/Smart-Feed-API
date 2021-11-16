@@ -12,7 +12,7 @@ class AuthenticateUserCase {
     const usersRepository = new UsersRepository();
     const userAlreadyExists = await usersRepository.findByEmail(data["email"]);
 
-    if (!userAlreadyExists) throw new Error("Nonexistent user");
+    if (!userAlreadyExists) throw new Error("Email não cadastrado");
 
     if (!userAlreadyExists["verified"]) {
       const activationIdsRepository = new ActivationIdsRepository();

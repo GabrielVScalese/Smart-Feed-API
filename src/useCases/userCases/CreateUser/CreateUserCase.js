@@ -8,7 +8,7 @@ class CreateUserCase {
 
     const userAlreadyExists = await usersRepository.findByEmail(data["email"]);
 
-    if (userAlreadyExists) throw new Error("User already exists");
+    if (userAlreadyExists) throw new Error("Email já cadastrado");
 
     const new_user = await usersRepository.save(data);
 

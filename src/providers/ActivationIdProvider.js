@@ -25,7 +25,7 @@ class ActivationIdProvider {
         email: process.env.EMAIL,
       },
       subject: "Seja bem vindo ao nosso app",
-      body: `<p>Olá ${user["name"]}, acesse esse link para ativar sua conta: <a>https://smart-feed-web.vercel.app/users/activateAccount/${activationId["id"]}</a></p>`,
+      body: `<p>Olá ${user["name"]}, acesse <a href='https://smart-feed-web.vercel.app/users/activateAccount/${activationId["id"]}'>esse link</a> para ativar sua conta: </p>`,
     });
 
     return activationId;

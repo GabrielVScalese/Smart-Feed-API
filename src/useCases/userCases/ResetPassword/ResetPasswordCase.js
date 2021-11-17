@@ -45,7 +45,7 @@ class ResetPasswordCase {
         email: process.env.EMAIL,
       },
       subject: "Recuperar senha da conta",
-      body: `<p>Olá ${user["name"]}, acesse <a href='https://smart-feed-web.vercel.app/users/resetPassword/${resetToken["id"]}'>esse link</a> para recuperar sua senha: </p>`,
+      body: `<p>Olá ${user["name"]}, acesse <a href='https://smart-feed-web.vercel.app/users/resetPassword/${resetToken["id"]}'>esse link</a> para recuperar sua senha</p>`,
     });
 
     return resetToken["id"];
